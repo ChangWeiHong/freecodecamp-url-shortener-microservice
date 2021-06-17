@@ -50,6 +50,12 @@ app.post('/api/shorturl', function(req, res){
 
   var resObj = {};
   var inputOriginalURL = req.body.url;
+
+  if (inputOriginalURL.indexOf("http://") !== 0 && inputOriginalURL.indexOf("https://") !== 0) {
+    res.json({ error: 'invalid url' });
+    res.end();
+  } else {
+
   var inputShortURL = 0;
 
   resObj["original_url"] = inputOriginalURL;
@@ -82,7 +88,7 @@ app.post('/api/shorturl', function(req, res){
         );
       }
     });
-
+  }
 });
 
 // GET, find by shorturl
